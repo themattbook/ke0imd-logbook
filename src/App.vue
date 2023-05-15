@@ -1,6 +1,13 @@
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue';
+import Login from './components/LoginUser.vue';
+import RegisterUser from './components/RegisterUser.vue';
 import Navbar from './components/Navbar.vue';
+import { ref } from 'vue';
+
+const newUser = ref(false);
+const toggleNewUser = () => {
+    newUser.value = !newUser.value;
+};
 </script>
 
 <template>
@@ -11,7 +18,11 @@ import Navbar from './components/Navbar.vue';
                 <div class="hero h-full bg-base-200">
                     <div class="hero-content flex-col">
                         <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-                            <HelloWorld />
+                            <Login v-if="!newUser" />
+                            <RegisterUser v-if="newUser" />
+                        </div>
+                        <div>
+                            <p @click="toggleNewUser" class="cursor-pointer text-center">New user? Create an account</p>
                         </div>
                     </div>
                 </div>
