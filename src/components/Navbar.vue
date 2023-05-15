@@ -9,7 +9,7 @@ const logOut = () => {
 <template>
     <div class="navbar bg-base-100">
         <div class="flex-1">
-            <a class="btn btn-ghost normal-case text-xl">Hamlog 2.0</a>
+            <a class="btn btn-ghost normal-case text-xl">Radio Operator's Logbook</a>
         </div>
         <div class="flex-none gap-2">
             <div class="dropdown dropdown-end" v-if="auth.user[0]">
