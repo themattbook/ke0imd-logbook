@@ -6,7 +6,8 @@ import jwt_decode from 'jwt-decode';
 export const useAuthStore = defineStore('auth', {
     state: () => ({
         user: [] as User[],
-        isLoggedIn: !!localStorage.getItem('token'),
+        token: localStorage.getItem('token'),
+        isLoggedIn: false,
     }),
     getters: {},
     actions: {
@@ -17,6 +18,8 @@ export const useAuthStore = defineStore('auth', {
                 await signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
                     localStorage.setItem('token', (userCredential.user as any).accessToken);
                     this.user.push(jwt_decode((userCredential.user as any).accessToken));
+                    this.token = localStorage.getItem('token');
+                    this.isLoggedIn = true;
                 });
             } catch (error) {
                 console.log(error);
