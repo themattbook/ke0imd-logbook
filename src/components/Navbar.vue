@@ -1,8 +1,15 @@
 <script setup lang="ts">
 import { useAuthStore } from '../stores/authStore';
+import { getAuth, signOut } from '../../node_modules/firebase/auth';
 const auth = useAuthStore();
 const logOut = () => {
-    localStorage.removeItem('token');
+    try {
+        localStorage.removeItem('token');
+        const auth = getAuth();
+        signOut(auth);
+    } catch (error) {
+        console.log(error);
+    }
 };
 </script>
 
@@ -12,7 +19,7 @@ const logOut = () => {
             <a class="btn btn-ghost normal-case text-xl">Radio Operator's Logbook</a>
         </div>
         <div class="flex-none gap-2">
-            <div class="dropdown dropdown-end" v-if="auth.user[0]">
+            <div class="dropdown dropdown-end" v-if="auth.isLoggedIn">
                 <label tabindex="0" class="btn btn-ghost btn-circle avatar">
                     <div class="w-10 rounded-full">
                         <img src="https://api.multiavatar.com/Starcrasher.png" />
