@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { useAuthStore } from '../stores/authStore';
 import { ref } from 'vue';
-import jwt_decode from 'jwt-decode';
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
@@ -19,11 +18,6 @@ const login = async (user: string, pass: string) => {
         console.log('Login error:', error);
     }
 };
-
-if (!!localStorage.getItem('token')) {
-    const decode = jwt_decode(localStorage.getItem('token') as any);
-    auth.user.push(decode as any);
-}
 </script>
 
 <template>

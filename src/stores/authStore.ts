@@ -17,7 +17,7 @@ export const useAuthStore = defineStore('auth', {
                 const password = pass;
                 await signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
                     localStorage.setItem('token', (userCredential.user as any).accessToken);
-                    this.user.push(jwt_decode((userCredential.user as any).accessToken));
+                    this.user.unshift(jwt_decode((userCredential.user as any).accessToken));
                     this.token = localStorage.getItem('token');
                     this.isLoggedIn = true;
                 });
