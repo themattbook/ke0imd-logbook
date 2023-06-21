@@ -2,11 +2,19 @@
 import Login from '../components/LoginUser.vue';
 import RegisterUser from '../components/RegisterUser.vue';
 import { ref } from 'vue';
+import { useAuthStore } from '../stores/authStore';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+const authState = useAuthStore();
 
 const newUser = ref(false);
 const toggleNewUser = () => {
     newUser.value = !newUser.value;
 };
+if (authState.token) {
+    router.push('/dashboard');
+}
 </script>
 <template>
     <div class="flex items-center justify-center h-[calc(100vh-66px)]">
